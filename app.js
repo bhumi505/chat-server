@@ -2,14 +2,17 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const os = require('os');
 const app = express();
 const server = require('http').createServer();
 const io = require('socket.io')(server, {
   cors: {
-    origin: window.location.protocol == "http:" ? process.env.ORIGIN_APP : process.env.HEROKU_ORIGIN_APP,
+    // origin: process.env.ORIGIN_APP,
+    origin: process.env.HEROKU_ORIGIN_APP,
     methods: ["GET", "POST"]
   }
 });
+console.log((os.hostname()))
 const allMessage = new Set();
 
 const corsOptions = {
